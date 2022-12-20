@@ -89,7 +89,7 @@ const menu = () => {
                 internQuestions();
                 break;
             default:
-                generateTeam();
+                buildTeam();
         }
     })    
 }
@@ -222,7 +222,7 @@ const internQuestions = () => {
     })
 } 
 //after finish building team, generateTeam will create team html
-const generateTeam = () => {
+const buildTeam = () => {
     console.log(team);
     const htmlContent = generateHTML(team);
     
@@ -231,103 +231,117 @@ const generateTeam = () => {
 }
 
 //generate html of team profiles
-const generateHTML = (team) => {
-`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <title>Team Profile Generator</title>
-</head>
-<body>
-    <header>
-        <h1>My Team</h1>
-    </header>
+const generateHTML = (team) => 
+    `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+        <title>Team Profile Generator</title>
+    </head>
+    <body>
+        <header>
+            <h1>My Team</h1>
+        </header>
 
-    <section>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            ${renderManager(team)}
-           
+        <section>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                ${renderManager(team)}
+                ${renderEngineer(team)}
+                ${renderIntern(team)}
+            
+            </div>
+            
+        </section>
+
+        <footer>
+
+        </footer>
+    </body>
+    </html>`;
+
+
+const createTeamHtml = (team) => {
+    const html = [];
+    //manager info
+    const renderManager = team => {
+        let managerHtml = 
+        `<div class="col">
+        <div class="card-header">
+        ${team.manager.name} <br />
+        <i class="bi bi-cup-hot"></i>Manager
         </div>
-        
-    </section>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Employee ID: ${manager.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
+                <li class="list-group-item">Office number: ${manager.officeNumber}</li>
+            </ul>
+        </div>
+        </div>`
+    
+        html.push(managerHtml);
+    }
 
-    <footer>
+    //engineer info
+    const renderEngineer = engineer => {
+        let engineerHtml = 
+            `<div class="col">
+            <div class="card-header">
+            ${engineer.name} <br />
+            <i class="bi bi-eyeglasses"></i>Engineer
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Employee ID: ${engineer.id}</li>
+                    <li class="list-group-item">Email: ${engineer.email}</li>
+                    <li class="list-group-item">Github Username: <a href="http://www.github.com/${engineer.github}">${engineer.github}</a></li>
+                </ul>
+            </div>
+            </div>`
 
-    </footer>
-</body>
-</html>`
+        html.push(engineerHtml);
+    }
+    
+    //intern info
+    const renderIntern = intern => {
+        let internHtml = 
+            `<div class="col">
+            <div class="card-header">
+            ${intern.name} <br />
+            <i class="bi bi-mortarboard"></i>Intern
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Employee ID: ${intern.id}</li>
+                    <li class="list-group-item">Email: ${intern.email}</li>
+                    <li class="list-group-item">School: ${intern.school}</li>
+                </ul>
+            </div>
+            </div>`
 
+        html.push(internHtml)
+    }
 }
 
-//manager info
-const renderManager = (team) => {
-    console.log(team.Manager);
-    let managerHtml = 
-    `<div class="col">
-    <div class="card-header">
-    ${team.Manager} <br />
-    <i class="bi bi-cup-hot"></i>Manager
-    </div>
-    <div class="card-body">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Employee ID: ${team.Manager}</li>
-            <li class="list-group-item">Email: <a href="mailto:${team.Manager}">${team.Manager}</a></li>
-            <li class="list-group-item">Office number: ${team.Manager}</li>
-        </ul>
-    </div>
-    </div>`
-}
 
-//engineer info
-const renderEngineer = (team) => {
-    console.log(engineer);
-    let engineerHtml = 
-    `<div class="col">
-    <div class="card-header">
-    ${engineer.name} <br />
-    <i class="bi bi-eyeglasses"></i>Engineer
-    </div>
-    <div class="card-body">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Employee ID: ${engineer.id}</li>
-            <li class="list-group-item">Email: ${engineer.email}</li>
-            <li class="list-group-item">Github Username: <a href="http://www.github.com/${engineer.github}">${engineer.github}</a></li>
-        </ul>
-    </div>
-    </div>`
-}
 
-//intern info
-const renderIntern = intern => {
-    console.log(intern);
-    let internHtml = 
-    `<div class="col">
-    <div class="card-header">
-    ${intern.name} <br />
-    <i class="bi bi-mortarboard"></i>Intern
-    </div>
-    <div class="card-body">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Employee ID: ${intern.id}</li>
-            <li class="list-group-item">Email: ${intern.email}</li>
-            <li class="list-group-item">School: ${intern.school}</li>
-        </ul>
-    </div>
-    </div>`
-}
+
 
 
 
 managerQuestions();
 
 
-//function to initialize application
-//const init = () => {
-//     inquirer.createPromptModule(managerQuestions)
-//         .then() <-- add writeFile function
-// }
-//init();
+// GIVEN a command-line application that accepts user input
+// WHEN I am prompted for my team members and their information
+// THEN an HTML file is generated that displays a nicely formatted team roster based on user input
+// WHEN I click on an email address in the HTML
+// THEN my default email program opens and populates the TO field of the email with the address
+// WHEN I click on the GitHub username
+// THEN that GitHub profile opens in a new tab
+
+// THEN I exit the application, and the HTML is generated
