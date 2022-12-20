@@ -240,18 +240,17 @@ const generateHTML = (team) =>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+        <link href="./style.css" rel="stylesheet">
         <title>Team Profile Generator</title>
     </head>
     <body>
         <header>
-            <h1>My Team</h1>
+            <h1 class="display-4 text-center p-2">My Team</h1>
         </header>
 
         <section>
-            <div class="row row-cols-1 row-cols-md-2 g-4">
-                ${renderManager(team)}
-                ${renderEngineer(team)}
-                ${renderIntern(team)}
+            <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center m-2">
+                ${createTeamHtml(team)}
             
             </div>
             
@@ -264,21 +263,21 @@ const generateHTML = (team) =>
     </html>`;
 
 
-const createTeamHtml = (team) => {
+function createTeamHtml(team) {
     const html = [];
     //manager info
-    const renderManager = team => {
+    const renderManager = member => {
         let managerHtml = 
-        `<div class="col">
-        <div class="card-header">
-        ${team.manager.name} <br />
-        <i class="bi bi-cup-hot"></i>Manager
+        `<div class="col" style="max-width: 18rem">
+        <div class="card-header bg-primary text-white text-capitalize">
+        <p class="h5">${member.name}</p>
+        <i class="bi bi-cup-hot"></i> Manager
         </div>
-        <div class="card-body">
+        <div class="card-body border" style="height:12rem">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Employee ID: ${manager.id}</li>
-                <li class="list-group-item">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
-                <li class="list-group-item">Office number: ${manager.officeNumber}</li>
+                <li class="list-group-item">Employee ID: ${member.id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${member.email}" target="_blank">${member.email}</a></li>
+                <li class="list-group-item">Office number: ${member.officeNumber}</li>
             </ul>
         </div>
         </div>`
@@ -289,16 +288,16 @@ const createTeamHtml = (team) => {
     //engineer info
     const renderEngineer = engineer => {
         let engineerHtml = 
-            `<div class="col">
-            <div class="card-header">
-            ${engineer.name} <br />
-            <i class="bi bi-eyeglasses"></i>Engineer
+            `<div class="col" style="max-width: 18rem;">
+            <div class="card-header bg-primary text-white text-capitalize">
+            <p class="h5">${engineer.name}</p>
+            <i class="bi bi-eyeglasses"></i> Engineer
             </div>
-            <div class="card-body">
+            <div class="card-body border" style="height:12rem">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Employee ID: ${engineer.id}</li>
-                    <li class="list-group-item">Email: ${engineer.email}</li>
-                    <li class="list-group-item">Github Username: <a href="http://www.github.com/${engineer.github}">${engineer.github}</a></li>
+                    <li class="list-group-item">Email: <a href="mailto:${engineer.email}" target="_blank">${engineer.email}</a></li>
+                    <li class="list-group-item">Github Username: <a href="http://www.github.com/${engineer.github}" target="_blank">${engineer.github}</a></li>
                 </ul>
             </div>
             </div>`
@@ -309,15 +308,15 @@ const createTeamHtml = (team) => {
     //intern info
     const renderIntern = intern => {
         let internHtml = 
-            `<div class="col">
-            <div class="card-header">
-            ${intern.name} <br />
-            <i class="bi bi-mortarboard"></i>Intern
+            `<div class="col" style="max-width: 18rem;">
+            <div class="card-header bg-primary text-white text-capitalize">
+            <p class="h5">${intern.name}</p>
+            <i class="bi bi-mortarboard"></i> Intern
             </div>
-            <div class="card-body">
+            <div class="card-body border" style="height:12rem">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Employee ID: ${intern.id}</li>
-                    <li class="list-group-item">Email: ${intern.email}</li>
+                    <li class="list-group-item">Email: <a href="mailto:${intern.email}" target="_blank">${intern.email}</a></li>
                     <li class="list-group-item">School: ${intern.school}</li>
                 </ul>
             </div>
@@ -325,6 +324,19 @@ const createTeamHtml = (team) => {
 
         html.push(internHtml)
     }
+
+    for(let i = 0; i < team.length; i++){
+        let member = team[i];
+        let role = member.getRole();
+        if(role === 'Manager'){
+            renderManager(member);
+        }else if(role === 'Engineer'){
+            renderEngineer(member);
+        }else if(role === 'Intern'){
+            renderIntern(member);
+        }
+    }
+    return html.join('');
 }
 
 

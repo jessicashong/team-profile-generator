@@ -2,16 +2,15 @@ const Employee = require('../lib/Employee');
 // const employee = new Employee('Jess', '123', 'jess@email.com');
 
 describe('Employee', () => {
-    describe('getName', () => {
-        it('should return name of new employee', () => {
-            const employee = new Employee();
-            const person = 'Jess';
+    it('should return name of new employee', () => {
+        const employee = new Employee();
+        const person = 'Jess';
 
-            employee.getName(person);
+        employee.getName(person);
 
-            expect(employee.name).toBe('Jess');
-        })
+        expect(employee.name).toBe('Jess');
     })
+    
     describe('getId', () => {
         it('should return id of new employee', () => {
             const employee = new Employee();
