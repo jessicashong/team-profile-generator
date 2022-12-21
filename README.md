@@ -19,7 +19,9 @@ Visit https://nodejs.org/en/download/ to install the latest version of Node.js a
 Once Node and npm are installed, run `node index.js` in the command line to begin answering prompts. Answer all prompts thoroughly.
 
 ## Visual Presentation
-[sampleHTML Walkthrough Video]()
+[sampleHTML Walkthrough Video](https://drive.google.com/file/d/1oPi5Kc2HBamPVaUzBwHtnHRU4z3Z-Dok/view)
+
+![sampleHTML](./images/team-profile-generator_dist_SAMPLE.html.png)
 
 ## Tests
 Test files are provided in the "tests" folder. Run `npm test` in the command line to test application.
@@ -27,4 +29,4 @@ Test files are provided in the "tests" folder. Run `npm test` in the command lin
 ## Links 
 GitHub Repo: [https://github.com/jessicashong/readme-generator](https://github.com/jessicashong/team-profile-generator)
 
-Sample HTML: []()
+Sample HTML: [./dist/SAMPLE.html](./dist/SAMPLE.html)

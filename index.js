@@ -63,10 +63,10 @@ const managerQuestions = () => {
             }
         }
     ]).then(data => {
-        console.log(data);
+        console.log("New manager added!");
         const manager = new Manager (data.name, data.id, data.email, data.officeNumber);
         team.push(manager)
-        console.log(team);
+        // console.log(team);
         menu();
     })
 }
@@ -150,10 +150,10 @@ const engineerQuestions = () => {
             }
         }
     ]).then(data => {
-        console.log(data);
+        console.log("New engineer added!");
         const engineer = new Engineer (data.name, data.id, data.email, data.github);
         team.push(engineer);
-        console.log(team);
+        // console.log(team);
         menu();
     })
 } 
@@ -214,19 +214,19 @@ const internQuestions = () => {
             }
         }
     ]).then(data => {
-        console.log(data);
+        console.log("New intern added!");
         const intern = new Intern (data.name, data.id, data.email, data.school);
         team.push(intern);
-        console.log(team);
+        // console.log(team);
         menu();
     })
 } 
 //after finish building team, generateTeam will create team html
 const buildTeam = () => {
-    console.log(team);
+    console.log("Building team...");
     const htmlContent = generateHTML(team);
     
-    fs.writeFile('./dist/SAMPLE.html', htmlContent, (err) =>
+    fs.writeFile('./dist/companyprofile.html', htmlContent, (err) =>
     err ? console.error(err) : console.log('Team profile complete!'));
 }
 
