@@ -27,6 +27,6 @@ Once Node and npm are installed, run `node index.js` in the command line to begi
 Test files are provided in the "tests" folder. Run `npm test` in the command line to test application.
 
 ## Links 
-GitHub Repo: [https://github.com/jessicashong/readme-generator](https://github.com/jessicashong/team-profile-generator)
+GitHub Repo: [https://github.com/jessicashong/team-profile-generator](https://github.com/jessicashong/team-profile-generator)
 
 Sample HTML: [./dist/SAMPLE.html](./dist/SAMPLE.html)
